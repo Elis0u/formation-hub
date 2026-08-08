@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FormationSession extends Model
 {
@@ -19,5 +20,10 @@ class FormationSession extends Model
     public function trainer()
     {
         return $this->belongsTo(User::class, 'trainer_id');
+    }
+
+    public function registrations(): HasMany
+    {
+        return $this->hasMany(Registration::class, 'session_id');
     }
 }
