@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { index } from '@/routes/formations';
-import { Head } from '@inertiajs/vue3';
+import { create, index } from '@/routes/formations';
+import { Head, Link } from '@inertiajs/vue3';
 
 interface FormationSession {
     id: number;
@@ -34,6 +34,12 @@ defineOptions({
 
     <div class="flex flex-col gap-4 p-4">
         <h1 class="text-xl font-semibold">Sessions de formation</h1>
+        <Link
+            :href="create()"
+            class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+        >
+            Nouvelle session
+        </Link>
 
         <div v-if="formations.length === 0">Aucune session pour le moment.</div>
 
