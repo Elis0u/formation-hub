@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { create, index } from '@/routes/formations';
+import { create, edit, index } from '@/routes/formations';
 import { Head, Link } from '@inertiajs/vue3';
 
 interface FormationSession {
@@ -51,6 +51,12 @@ defineOptions({
             >
                 <p class="font-medium">{{ formation.title }}</p>
                 <p class="text-sm text-muted-foreground">{{ formation.location }}</p>
+                <Link
+                    :href="edit(formation.id)"
+                    class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+                >
+                    Editer
+                </Link>
             </li>
         </ul>
     </div>

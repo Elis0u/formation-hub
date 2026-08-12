@@ -15,8 +15,8 @@ class FormationSession extends Model
     protected function casts(): array
     {
         return [
-            'start_at' => 'datetime:d-m-Y H:i',
-            'end_at' => 'datetime:d-m-Y H:i',
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
         ];
     }
 
