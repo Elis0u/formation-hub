@@ -8,6 +8,7 @@ use App\Models\FormationSession;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FormationSessionController extends Controller
 {
@@ -22,6 +23,8 @@ class FormationSessionController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', FormationSession::class);
+
         $trainers = User::where('role', 'trainer')->get();
 
         return Inertia::render('Formations/Create',['trainers' => $trainers]);
@@ -29,6 +32,7 @@ class FormationSessionController extends Controller
 
     public function store(StoreFormationSessionRequest $request)
     {
+        Gate::authorize('create', FormationSession::class);
         $validated = $request->validated();
         FormationSession::create($validated);
         return redirect()->route('formations.index');
@@ -36,6 +40,8 @@ class FormationSessionController extends Controller
 
     public function edit(FormationSession $formation)
     {
+
+        Gate::authorize('update', $formation);
         $trainers = User::where('role', 'trainer')->get();
 
         return Inertia::render('Formations/Edit', ['formation' =>  $formation, 'trainers' => $trainers]);
@@ -43,6 +49,8 @@ class FormationSessionController extends Controller
 
     public function update(UpdateFormationSessionRequest $request, FormationSession $formation)
     {
+
+        Gate::authorize('update', $formation);
         $validated = $request->validated();
         $formation->update($validated);
         return redirect()->route('formations.index');
