@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { create } from '@/routes/registrations';
+import { Head, Link } from '@inertiajs/vue3';
 
 interface Contact {
     id: number;
@@ -40,6 +41,12 @@ defineOptions({
             >
                 <p class="font-medium">{{ contact.name }}</p>
                 <p class="text-sm text-muted-foreground">{{ contact.email }}</p>
+                <Link
+                    :href="create(contact.id)"
+                    class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+                >
+                    Ajouter à une session
+                </Link>
             </li>
         </ul>
     </div>
