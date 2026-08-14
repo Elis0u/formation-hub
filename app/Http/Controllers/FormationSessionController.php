@@ -14,11 +14,13 @@ class FormationSessionController extends Controller
 {
     public function index()
     {
-        $formations = FormationSession::all();
+        $user = auth()->user();
 
-        return Inertia::render('Formations/Index', [
-            'formations' => $formations,
-        ]);
+        $formations = $user->role === 'admin'
+            ? FormationSession::with('registrations')->get()
+            : FormationSession::where('trainer_id', $user->id)->with('registrations')->get();
+
+        return Inertia::render('Formations/Index', ['formations' => $formations]);
     }
 
     public function create()
